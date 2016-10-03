@@ -1,0 +1,7 @@
+source coulombic_tetramer_phe.tcl
+source coulombic_tetramer_apo.tcl
+source sidechain_Hbond_tetramer_phe.tcl
+source sidechain_Hbond_tetramer_apo.tcl
+source backbone_Hbond_tetramer_phe.tcl
+source backbone_Hbond_tetramer_apo.tcl
+
