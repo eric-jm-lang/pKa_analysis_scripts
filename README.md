@@ -211,7 +211,7 @@ complications, except for `parse_propka_output.py` and
 `analyse_pka_interactions.py`
 
 
- 4.1. Modifying `parse_propka_output.py`
+## 4.1. Modifying `parse_propka_output.py`
 -----------------------------------------------------------------------------
 
 Please refer to `Example_parse_propka_output.py` to see the modifications of the 
@@ -281,7 +281,7 @@ where `MN    1 I` is the id extracted from the PDB by the script
 Finally you can modify the filenames in _line 178 to 186_.
 
 
- 4.2. Modifying the `analyse_pka_interactions.py`
+## 4.2. Modifying the `analyse_pka_interactions.py`
 -----------------------------------------------------------------------------
 
 Please refer to `Example_analyse_pka_interactions.py` to see the modifications 
