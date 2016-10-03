@@ -6,6 +6,8 @@ AUTHOR: Eric Lang <eric.jm.lang@gmail.com>
 
 University of Canterbury
 
+Licensed under the GNU General Public License
+
 If you use these scripts, please cite:
 
 	Calculated pKa Variations Expose Dynamic Allosteric Communication Networks
