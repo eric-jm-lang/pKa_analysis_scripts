@@ -210,7 +210,9 @@ Modification of most of the scripts should not be too much a source of
 complications, except for `parse_propka_output.py` and 
 `analyse_pka_interactions.py`
 
- ### 4.1. Modifying `parse_propka_output.py`
+
+ 4.1. Modifying `parse_propka_output.py`
+-----------------------------------------------------------------------------
 
 Please refer to `Example_parse_propka_output.py` to see the modifications of the 
 original script
@@ -223,8 +225,8 @@ need to modify the part `[CAMN]` in:
 	SearchHETATM='^[HETATM\s\d]{11}\s+[CAMN]{2}\s+\w{2}[\w\s]\s(\w)\s+\d+'
 
 Here the HETATM entries correspond to the Mn<sup>2+</sup> ions and the PHE ligand (which 
-as a **CA**) so we look for **CA** or **MN** in the regular expression string. 
-Here I used **CA** but it could have been any other unique PHE atoms such as **CB**, 
+as a CA) so we look for CA or MN in the regular expression string. 
+Here I used CA but it could have been any other unique PHE atoms such as CB, 
 in which case it would have been `[CBMN]` in the `SearchHETATM` string. If we had 
 Zn<sup>2+</sup> instead of Mn<sup>2+</sup> it could have been `[CBZN]`.
 
@@ -236,8 +238,8 @@ ligands (line 161 to 166 of the original script).
 Here one of our ligand is PHE, so it has both an amine and an acid carboxylic
 group. Therefore its pKa will be calculated by PROPKA. if you look at 
 `Example.pka` you can see how the amine and carboxylate functions are defined 
-in PROPKA. Where you usually have the residue number, you find the function: **N** 
-or **C** (for amine and carboxylate resp.). This is what you need to identify 
+in PROPKA. Where you usually have the residue number, you find the function: N 
+or C (for amine and carboxylate resp.). This is what you need to identify 
 them, and you can modify the original script to have:
 
         if chain in Chains_het: 
@@ -255,8 +257,8 @@ you can always find out the number manually.
 
 Because we have two different charged function on the ligand it is easier to 
 work as if there were two ligands each carrying only one charge. This is shown 
-at the end of `Example_residues.dat` where **PH1** corresponds to the amine 
-function of PHE and **PH2** to the carboxylate function of PHE. This part can be 
+at the end of `Example_residues.dat` where PH1 corresponds to the amine 
+function of PHE and PH2 to the carboxylate function of PHE. This part can be 
 reused "as is" for any amino acid ligands
 
 Sometimes your ligands might not be ionizable but interact with the ionizable
@@ -267,7 +269,7 @@ for example on _line 123_ of `Example.pka` there is the following:
 
 So the Manganese ion forms coulombic interactions with residue `ASP 267`, 
 it needs therefore to be added to the dictionnary `Id_2_Numb`. 
-There are 4 Mn^2+ in the structure file, to add them to the dictionnary 
+There are 4 Mn<sup>2+</sup> in the structure file, to add them to the dictionnary 
 
 	Id_2_Numb["MN  MN I"] = Id_2_Numb["MN    1 I"]
 	Id_2_Numb["MN  MN J"] = Id_2_Numb["MN    1 J"]
@@ -279,13 +281,14 @@ where `MN    1 I` is the id extracted from the PDB by the script
 Finally you can modify the filenames in _line 178 to 186_.
 
 
- ###4.2. Modifying the `analyse_pka_interactions.py `
+ 4.2. Modifying the `analyse_pka_interactions.py`
+-----------------------------------------------------------------------------
 
 Please refer to `Example_analyse_pka_interactions.py` to see the modifications 
 of the original script
 
 First we need to specify the charged ligand in the residuepKa function
-Here we have **PH1** (amine of PHE) and MN which are positively charged and **PH2** is 
+Here we have PH1 (amine of PHE) and MN which are positively charged and PH2 is 
 negativelly charged so we add them to the lists:
 
 	positive_charge = ['PH1   1', 'MN   1' ] 
