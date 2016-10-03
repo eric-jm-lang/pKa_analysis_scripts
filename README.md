@@ -1,8 +1,8 @@
 # pKa analysis scripts
 
-Author: Eric Lang 
-<eric.jm.lang@gmail.com>
-University of Canterbury
+Author: Eric Lang  
+<eric.jm.lang@gmail.com>  
+University of Canterbury  
 
 Licensed under the GNU General Public License
 
@@ -16,14 +16,14 @@ If you use these scripts, please cite:
 
 Table of contents:
 
-[1. Introduction](#1. Introduction)
-[2. Installation](#2. Installation)
-[3. How to perform the analysis](#3. How to perform the analysis)
-[4. Examples of custom modification of the scripts](#4. Examples of custom modification of the scripts)
+[1. Introduction](## 1. Introduction)  
+[2. Installation](## 2. Installation)  
+[3. How to perform the analysis](## 3. How to perform the analysis)  
+[4. Examples of custom modification of the scripts](## 4. Examples of custom modification of the scripts)
 
 -----------------------------------------------------------------------------
 ## 1. Introduction
------------------------------------------------------------------------------
+
 
 This is a collection of scripts used in the paper _"Calculated pKa Variations 
 Expose Dynamic Allosteric Communication Networks"_ published in JACS (see 
@@ -41,7 +41,7 @@ If you have any problems or comments, you can to contact me.
 
 -----------------------------------------------------------------------------
 ## 2. Installation
------------------------------------------------------------------------------
+
 
 This is a collection of scripts so no installation of scripts are required,
 they just need to be in your working directory or in your path.
@@ -67,7 +67,7 @@ to be installed.
 
 -----------------------------------------------------------------------------
 ## 3. How to perform the analysis
------------------------------------------------------------------------------
+
 
 You need to start in your working directory with your trajectory file(s) and 
 create a directory
@@ -140,24 +140,19 @@ of files. In detail it does the following:
  * Do the same for side-chain H-bonds and coulombic interactions.
 
  * The generated matrices are not symmetrical but take the form:
-
-	0 X 0
-	-X 0 Y
+	0 X 0  
+	-X 0 Y  
 	Z 0 0
-
    In order to be able to average the value by chain during the 
    analysis, a number of operations need to be done 
    on the matrices in order to have them in the form:
-
-	0 X -Z
-	0 0 Y
+	0 X -Z  
+	0 0 Y  
 	0 0 0
-
    This if for one pKa file. This is repeated for all pKa files and each new 
    set of three matrices is added to the first set
    of matrices generated and the resulting set of matrices are saved 
    in `sidechain_Hbond_mat.dat` `backbone_Hbond_mat.dat`, `coulombic_mat.dat`.
-
 
 
 Once the parsing is done, the resulting files can be analysed with other 
@@ -200,8 +195,8 @@ You can then run the tcl scripts in VMD.
 
 
 -----------------------------------------------------------------------------
-4. Examples of custom modifications of the scripts
------------------------------------------------------------------------------
+## 4. Examples of custom modifications of the scripts
+
 
 As mentioned previously the scripts need to be modified according to your
 needs. This requires some work, but in the Example directory you will find
