@@ -22,7 +22,7 @@ Table of contents:
 [4. Examples of custom modification of the scripts](#4. Examples of custom modification of the scripts)
 
 -----------------------------------------------------------------------------
-1. Introduction
+## 1. Introduction
 -----------------------------------------------------------------------------
 
 This is a collection of scripts used in the paper _"Calculated pKa Variations 
@@ -40,7 +40,7 @@ modified according to your needs are indicated.
 If you have any problems or comments, you can to contact me.
 
 -----------------------------------------------------------------------------
-2. Installation
+## 2. Installation
 -----------------------------------------------------------------------------
 
 This is a collection of scripts so no installation of scripts are required,
@@ -66,7 +66,7 @@ to be installed.
 
 
 -----------------------------------------------------------------------------
-3. How to perform the analysis
+## 3. How to perform the analysis
 -----------------------------------------------------------------------------
 
 You need to start in your working directory with your trajectory file(s) and 
@@ -140,15 +140,19 @@ of files. In detail it does the following:
  * Do the same for side-chain H-bonds and coulombic interactions.
 
  * The generated matrices are not symmetrical but take the form:
+
 	0 X 0
 	-X 0 Y
 	Z 0 0
+
    In order to be able to average the value by chain during the 
    analysis, a number of operations need to be done 
    on the matrices in order to have them in the form:
+
 	0 X -Z
 	0 0 Y
 	0 0 0
+
    This if for one pKa file. This is repeated for all pKa files and each new 
    set of three matrices is added to the first set
    of matrices generated and the resulting set of matrices are saved 
@@ -211,8 +215,7 @@ complications, except for `parse_propka_output.py` and
 `analyse_pka_interactions.py`
 
 
-## 4.1. Modifying `parse_propka_output.py`
------------------------------------------------------------------------------
+### 4.1. Modifying `parse_propka_output.py`
 
 Please refer to `Example_parse_propka_output.py` to see the modifications of the 
 original script
@@ -281,8 +284,7 @@ where `MN    1 I` is the id extracted from the PDB by the script
 Finally you can modify the filenames in _line 178 to 186_.
 
 
-## 4.2. Modifying the `analyse_pka_interactions.py`
------------------------------------------------------------------------------
+### 4.2. Modifying the `analyse_pka_interactions.py`
 
 Please refer to `Example_analyse_pka_interactions.py` to see the modifications 
 of the original script
