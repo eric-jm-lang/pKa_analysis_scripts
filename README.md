@@ -1,9 +1,7 @@
+# pKa analysis scripts
 
------------------------------------------------------------------------------
-pKa analysis scripts - Readme -	Feb/2016
-
-AUTHOR: Eric Lang <eric.jm.lang@gmail.com>
-
+Author: Eric Lang 
+<eric.jm.lang@gmail.com>
 University of Canterbury
 
 Licensed under the GNU General Public License
@@ -15,19 +13,20 @@ If you use these scripts, please cite:
   >Journal of the American Chemical Society 2016 138 (6), 2036-2045
   >DOI: 10.1021/jacs.5b13134 
 
------------------------------------------------------------------------------
 
+Table of contents:
+
+[1. Introduction](#1. Introduction)
+[2. Installation](#2. Installation)
+[3. How to perform the analysis](#3. How to perform the analysis)
+[4. Examples of custom modification of the scripts](#4. Examples of custom modification of the scripts)
+
+-----------------------------------------------------------------------------
 1. Introduction
-2. Installation
-3. How to perform the analysis
-4. Examples of custom modification of the scripts
-
------------------------------------------------------------------------------
-1. Introduction
 -----------------------------------------------------------------------------
 
-This is a collection of scripts used in the paper "Calculated pKa Variations 
-Expose Dynamic Allosteric Communication Networks" published in JACS (see 
+This is a collection of scripts used in the paper _"Calculated pKa Variations 
+Expose Dynamic Allosteric Communication Networks"_ published in JACS (see 
 citation above).
 
 Most of these scripts are custom made for the analysis of the data presented 
@@ -52,16 +51,16 @@ to be installed.
 - PROPKA 3.1 (https://github.com/jensengroup/propka-3.1)
 
 - Python 2: the following python modules needs to be installed (e.g. using `pip`):
-	* glob
-	* numpy 
+ * glob
+ * numpy 
 
-- Batcher. This software enables to parallelise the multiple PROPKA runs.
+- Batcher. This software enables to parallelise multiple PROPKA runs.  
   Batcher is part of the ADLB library and can be downloaded from the 
   following site:
   https://www.cs.mtsu.edu/~rbutler/adlb/ and follow the instructions of the 
-  authors to install it. BAtcher is advantageously installed on a cluster so 
-  it can be used  with a large number of cores, meaninag that a lot of  
-  PROPKA run can be performed at the same time.
+  authors to install it. Batcher is advantageously installed on a cluster so 
+  it can be used  with a large number of cores, meaning that a large number of
+  PROPKA runs can be performed at the same time.
 
 - VMD (http://www.ks.uiuc.edu/Research/vmd/)
 
@@ -83,16 +82,16 @@ of frames and run:
 	vmd -dispdev text -e DCD2PDBs.tcl 
 
 If the PDB are not "standard" PDB files, convert them into standard ones. 
-e.g. for CHARMM or NAMD generated PDB use convert_PDB_files.py included.
+e.g. for CHARMM or NAMD generated PDB use `convert_PDB_files.py` included.
 
 	python convert_PDB_files.py > convert_PDB_files.log
 
 Then prepare the input file for Batcher using the 
-create_input_command_batcher.sh batch script:
+`create_input_command_batcher.sh` batch script:
 
 	bash create_input_command_batcher.sh
 
-This will generate the file "batcher_input_command" which can then be passed 
+This will generate the file `batcher_input_command` which can then be passed on 
 to Batcher, e.g.:
 
 	mpiexec -n X batcher_input_command
@@ -122,8 +121,8 @@ of files. In detail it does the following:
   'residues.dat'
 
 - Extract the total pKa value and the total contribution of the desolvation 
-  effect (in unit of pKa) and save them in two files: 'pka_all.dat' and  
-  'desolvation_all.dat' in which each row corresponds to a different 
+  effect (in unit of pKa) and save them in two files: `pka_all.dat` and 
+  `desolvation_all.dat` in which each row corresponds to a different 
   ionizable residue and each column corresponds to a trajectory frame.
 
 - For one pka file, create 3 matrices of dimension number of residues x 
@@ -141,26 +140,26 @@ of files. In detail it does the following:
  * Do the same for side-chain H-bonds and coulombic interactions.
 
  * The generated matrices are not symmetrical but take the form:
-     0 X 0
-    -X 0 Y
-     Z 0 0
+	0 X 0
+	-X 0 Y
+	Z 0 0
    In order to be able to average the value by chain during the 
    analysis, a number of operations need to be done 
    on the matrices in order to have them in the form:
-     0 X -Z
-     0 0 Y
-     0 0 0
+	0 X -Z
+	0 0 Y
+	0 0 0
    This if for one pKa file. This is repeated for all pKa files and each new 
    set of three matrices is added to the first set
    of matrices generated and the resulting set of matrices are saved 
-   in'sidechain_Hbond_mat.dat''backbone_Hbond_mat.dat', 'coulombic_mat.dat'
+   in `sidechain_Hbond_mat.dat` `backbone_Hbond_mat.dat`, `coulombic_mat.dat`.
 
 
 
 Once the parsing is done, the resulting files can be analysed with other 
 scripts. For the total pKa value and the desolvation effect, the values are 
 averaged per chain and the standard deviation calculated with the 
-analyse_pka_global.py script:
+`analyse_pka_global.py` script:
 
 	python analyse_pka_global.py
 
@@ -174,7 +173,7 @@ The same is done for the desolvation running:
 The files `sidechain_Hbond_mat.dat`,`backbone_Hbond_mat.dat` and 
 `coulombic_mat.dat`can then be used to identify the H-bond
 and coulombic interactions networks. This is done with 
-analyse_pka_interactions.py script:
+`analyse_pka_interactions.py` script:
 
 	python analyse_pka_interactions.py
 
@@ -185,9 +184,9 @@ analysis in the presence and abscence of effector. it also requires the
 the `AVERAGE_pKa.dat` files calculated with `analyse_pka_global.py` both in the 
 presence and abscence of effector,and an Identifier.dat file which is 
 extracted from one .pka file (the summary section where the residues are 
-listed i.e. the 'SUMMARY OF THIS PREDICTION' section - an example is given 
+listed i.e. the `SUMMARY OF THIS PREDICTION` section - an example is given 
 'Example_Identifier.dat'). Finally a number of parameters need to be added: 
-pH, number of frames in the initial trajectories, etc.
+ pH, number of frames in the initial trajectories, etc.
 
 This script mainly calculates the difference in average interaction between 
 residues in the presence and abscence of effector and then generate 
@@ -211,7 +210,7 @@ Modification of most of the scripts should not be too much a source of
 complications, except for `parse_propka_output.py` and 
 `analyse_pka_interactions.py`
 
- ###4.1. Modifying the `parse_propka_output.py`
+ ### 4.1. Modifying `parse_propka_output.py`
 
 Please refer to `Example_parse_propka_output.py` to see the modifications of the 
 original script
@@ -220,13 +219,14 @@ First you need to modify the `SearchHETATM` (line  of the original script)
 string to identify `HETATM` entries in your PDB file. 
 This is simply used to identify each residue. You should only 
 need to modify the part `[CAMN]` in:
-    ```SearchHETATM='^[HETATM\s\d]{11}\s+[CAMN]{2}\s+\w{2}[\w\s]\s(\w)\s+\d+'```
 
-Here the HETATM entries correspond to the Mn^2+ ions and the PHE ligand (which 
-as a `CA`) so we look for `CA` or `MN` in the regular expression string. 
-Here I used `CA` but it could have been any other unique PHE atoms such as `CB`, 
+	SearchHETATM='^[HETATM\s\d]{11}\s+[CAMN]{2}\s+\w{2}[\w\s]\s(\w)\s+\d+'
+
+Here the HETATM entries correspond to the Mn<sup>2+</sup> ions and the PHE ligand (which 
+as a **CA**) so we look for **CA** or **MN** in the regular expression string. 
+Here I used **CA** but it could have been any other unique PHE atoms such as **CB**, 
 in which case it would have been `[CBMN]` in the `SearchHETATM` string. If we had 
-Zn^2+ instead of Mn^2+ it could have been `[CBZN]`.
+Zn<sup>2+</sup> instead of Mn<sup>2+</sup> it could have been `[CBZN]`.
 
 The second thing to modify is the function 'dictionnaries'. This function is 
 used to asign a unique ID to each unique residue that can interact with a 
@@ -236,8 +236,8 @@ ligands (line 161 to 166 of the original script).
 Here one of our ligand is PHE, so it has both an amine and an acid carboxylic
 group. Therefore its pKa will be calculated by PROPKA. if you look at 
 `Example.pka` you can see how the amine and carboxylate functions are defined 
-in PROPKA. Where you usually have the residue number, you find the function: `N` 
-or `C` (for amine and carboxylate resp.). This is what you need to identify 
+in PROPKA. Where you usually have the residue number, you find the function: **N** 
+or **C** (for amine and carboxylate resp.). This is what you need to identify 
 them, and you can modify the original script to have:
 
         if chain in Chains_het: 
@@ -248,27 +248,32 @@ them, and you can modify the original script to have:
 
 if you cannot easily find a way to calculate the number associated with each 
 ligand ID, using for example:
+
 	len(Chains) - len(Chains_het))*Resid_count + (Chain_2_Numb[chain] - (len(Chains) - len(Chains_het)) 
+
 you can always find out the number manually. 
 
 Because we have two different charged function on the ligand it is easier to 
 work as if there were two ligands each carrying only one charge. This is shown 
-at the end of `Example_residues.dat` where `PH1` corresponds to the amine 
-function of PHE and `PH2` to the carboxylate function of PHE. This part can be 
+at the end of `Example_residues.dat` where **PH1** corresponds to the amine 
+function of PHE and **PH2** to the carboxylate function of PHE. This part can be 
 reused "as is" for any amino acid ligands
 
 Sometimes your ligands might not be ionizable but interact with the ionizable
 residues nontheless and thus need to be added to the dictionnary.
 for example on _line 123_ of `Example.pka` there is the following:
+
 	ASP 267 A   2.72*  100 %    2.90  611   0.54    0    0.00 XXX   0 X   -0.77 SER 269 A   -1.10 MN   MN I
 
 So the Manganese ion forms coulombic interactions with residue `ASP 267`, 
 it needs therefore to be added to the dictionnary `Id_2_Numb`. 
 There are 4 Mn^2+ in the structure file, to add them to the dictionnary 
+
 	Id_2_Numb["MN  MN I"] = Id_2_Numb["MN    1 I"]
 	Id_2_Numb["MN  MN J"] = Id_2_Numb["MN    1 J"]
 	Id_2_Numb["MN  MN K"] = Id_2_Numb["MN    1 K"]
 	Id_2_Numb["MN  MN L"] = Id_2_Numb["MN    1 L"]
+
 where `MN    1 I` is the id extracted from the PDB by the script
 
 Finally you can modify the filenames in _line 178 to 186_.
@@ -280,8 +285,9 @@ Please refer to `Example_analyse_pka_interactions.py` to see the modifications
 of the original script
 
 First we need to specify the charged ligand in the residuepKa function
-Here we have `PH1` (amine of PHE) and MN which are positively charged and `PH2` is 
+Here we have **PH1** (amine of PHE) and MN which are positively charged and **PH2** is 
 negativelly charged so we add them to the lists:
+
 	positive_charge = ['PH1   1', 'MN   1' ] 
 	negative_charge = ['PH2   1'] 
 
@@ -297,10 +303,4 @@ scripts to obtain the averaged interaction maps for both the dimer and the
 tetramer.
 
 Finally the name of the files can be changed
-
-
-
-
-
-
 
